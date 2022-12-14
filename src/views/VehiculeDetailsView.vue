@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex flex-row mt-5 m-auto gap-20">
+  <main class="container flex flex-row mt-5 m-auto gap-20">
     <div class="flex-1">
       <PvImageSlider v-if="vehicule" :images="vehicule.pictures" class="h-96" />
       <div v-if="vehicule">
@@ -8,15 +8,19 @@
           <div class="flex flex-col">
             <h1 class="text-2xl">{{ vehicule.title }}</h1>
             <p class="text-lg flex-1">{{ vehicule.location.city }}</p>
-            <StarRating
-              :rating="vehicule.review.average"
-              read-only
-              :increment="0.1"
-              :star-size="25"
-            />
+            <div class="flex flex-row gap-2 content-center">
+              <StarRating
+                :rating="vehicule.review.average"
+                read-only
+                :increment="0.1"
+                :star-size="28"
+                :show-rating="false"
+              />
+              <p class="text-lg">{{ vehicule.review.count }} avis</p>
+            </div>
           </div>
         </section>
-        <section class="flex flex-row mt-10 gap-5">
+        <section class="flex flex-row justify-between mt-10">
           <PvVehiculeDetailsProperty
             :label="`${vehicule.seatsCount} places avec ceinture`"
             icon="fa-solid fa-chair"
@@ -64,7 +68,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 <script>
 import { onMounted, ref, computed } from "vue";

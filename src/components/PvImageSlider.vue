@@ -1,24 +1,20 @@
 <template>
   <div class="relative">
-    <button
+    <PvIconButton
       v-if="previousBtnEnabled"
-      class="absolute left-0 top-2/4 w-10 h-10 my-auto border-2 bg-slate-300 rounded-full z-20"
+      icon="fa-solid fa-chevron-left"
+      class="absolute left-0 top-2/4 z-20"
       style="transform: translate(0, -50%)"
       @click="onPreviousClick"
-      aria-label="previous image"
-    >
-      <font-awesome-icon icon="fa-solid fa-chevron-left" />
-    </button>
+    />
     <PvImage :src="selectedImageSrc" class="max-h-full" />
-    <button
+    <PvIconButton
       v-if="nextBtnEnabled"
-      class="absolute right-0 top-2/4 w-10 h-10 my-auto border-2 bg-slate-300 rounded-full z-20"
-      style="transform: translate(0, -50%)"
+      icon="fa-solid fa-chevron-right"
+      class="absolute right-0 top-2/4 w-10 h-10 z-20"
       @click="onNextClick"
-      aria-label="next image"
-    >
-      <font-awesome-icon icon="fa-solid fa-chevron-right" />
-    </button>
+      style="transform: translate(0, -50%)"
+    />
     <p
       class="absolute bottom-0 left-0 right-0 text-center opacity-75 bg-slate-800 text-white"
     >
@@ -28,6 +24,7 @@
 </template>
 <script>
 import { ref, computed } from "vue";
+import PvIconButton from "./PvIconButton.vue";
 import PvImage from "./PvImage.vue";
 
 export default {
@@ -38,7 +35,7 @@ export default {
       required: true,
     },
   },
-  components: { PvImage },
+  components: { PvImage, PvIconButton },
   setup(props) {
     const selectedIndex = ref(0);
 

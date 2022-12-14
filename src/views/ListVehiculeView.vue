@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row gap-10 justify-center mx-5 my-8">
     <div class="bg-white w-96">Filter</div>
-    <div class="flex flex-row flex-wrap w-full gap-8">
+    <main class="flex flex-row flex-wrap w-full gap-8">
       <PvSpinner v-if="vehiculesLoadingState === 'loading'" class="m-auto" />
       <template v-else>
         <PvVehiculeCard
@@ -17,7 +17,7 @@
           :pictureUrl="vehicule.pictures[0]?.url"
         />
       </template>
-    </div>
+    </main>
   </div>
 </template>
 <script>
