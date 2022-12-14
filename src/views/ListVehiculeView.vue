@@ -1,64 +1,48 @@
 <template>
-  <div class="flex flex-row gap-10 justify-center mx-5">
+  <div class="flex flex-row gap-10 justify-center mx-5 my-8">
     <div class="bg-white w-96">Filter</div>
     <div class="flex flex-row flex-wrap w-full gap-8">
-      <VehiculeCard
-        v-for="vehicule in vehicules"
-        :key="vehicule.id"
-        :title="vehicule.title"
-        :price="vehicule.price"
-        :locationCity="vehicule.location.city"
-        :seatsCount="vehicule.seatsCount"
-        :bedsCount="vehicule.bedsCount"
-        :ratingAverage="vehicule.review.average"
-        :pictureUrl="vehicule.pictures[0]?.url"
-      />
+      <PvSpinner v-if="vehiculesLoadingState === 'loading'" class="m-auto" />
+      <template v-else>
+        <PvVehiculeCard
+          v-for="vehicule in vehicules"
+          :key="vehicule.id"
+          :title="vehicule.title"
+          :price="vehicule.price"
+          :locationCity="vehicule.location.city"
+          :seatsCount="vehicule.seatsCount"
+          :bedsCount="vehicule.bedsCount"
+          :ratingAverage="vehicule.review.average"
+          :pictureUrl="vehicule.pictures[0]?.url"
+        />
+      </template>
     </div>
   </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
-import { fetchVehicules } from "../services/api";
-import VehiculeCard from "../components/VehiculeCard.vue";
+import { onMounted } from "vue";
+import { useVehiculesStore } from "../stores/vehicules";
+import { storeToRefs } from "pinia";
+import PvVehiculeCard from "../components/PvVehiculeCard.vue";
+import PvSpinner from "../components/PvSpinner.vue";
 export default {
   components: {
-    VehiculeCard,
+    PvVehiculeCard,
+    PvSpinner,
   },
   setup() {
-    const vehicules = ref([]);
+    const store = useVehiculesStore();
 
-    onMounted(async () => {
-      const apiResponse = await fetchVehicules();
+    const { vehicules, vehiculesLoadingError, vehiculesLoadingState } =
+      storeToRefs(store);
 
-      vehicules.value = apiResponse.results.map((vehicule) => ({
-        id: vehicule.id,
-        title: vehicule.title,
-        type: vehicule.vehicle_type,
-        bedsCount: vehicule.vehicle_beds,
-        seatsCount: vehicule.vehicle_seats,
-        location: {
-          city: vehicule.vehicle_location_city,
-          zipcode: vehicule.vehicle_location_zipcode,
-        },
-        owner: {
-          firstName: vehicule.vehicle_owner_first_name,
-          language: vehicule.vehicle_owner_language,
-          pictureUrl: vehicule.vehicle_owner_picture_url,
-        },
-        price: {
-          amount: vehicule.starting_price,
-          currency: vehicule.currency_used,
-        },
-        review: {
-          average: vehicule.review_average,
-          count: vehicule.review_count,
-        },
-        url: vehicule.url,
-        pictures: vehicule.pictures,
-      }));
+    onMounted(() => {
+      store.loadVehicules();
     });
 
     return {
+      vehiculesLoadingState,
+      vehiculesLoadingError,
       vehicules,
     };
   },
