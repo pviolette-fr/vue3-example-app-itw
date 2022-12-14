@@ -1,17 +1,11 @@
-<script setup>
-import { RouterView } from "vue-router";
-</script>
-
 <template>
-  <header
-    class="sticky top-0 z-50 bg-slate-700 shadow-md shadow-slate-400 h-16"
-  >
-    Header
-  </header>
-
+  <TheNavBar />
   <div class="w-full">
     <RouterView />
   </div>
 </template>
-
+<script setup>
+import { RouterView } from "vue-router";
+import TheNavBar from "./components/TheNavBar.vue";
+</script>
 <style scoped></style>

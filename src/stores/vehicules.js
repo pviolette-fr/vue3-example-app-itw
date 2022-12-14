@@ -2,9 +2,25 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { fetchVehicules } from "../services/api";
 
+/**
+ * @typedef {Object} Vehicule
+ * @property {number} id
+ * @property {title} string
+ * @property {bedsCount} number
+ * @property {seatsCount} number
+ * @property {{city: string, zipcode: string}} location
+ * @property {{amount: number, currency: string}} price
+ * @property {{average: number, count: number}} review
+ * @property {{firstName: string, pictureUrl: string, language: string}}
+ * @property {string} url
+ * @property {{id: string, url: string}[]} pictures
+ */
+
 export const useVehiculesStore = defineStore("vehicules", () => {
+  /** @type {import("vue").Ref<Vehicule[]>} */
   const vehicules = ref([]);
   const vehiculesLoadingError = ref(null);
+  /** @type { import("vue").Ref<"empty" | "loading" | "loaded">} */
   const vehiculesLoadingState = ref("empty");
 
   async function loadVehicules() {

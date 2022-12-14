@@ -4,12 +4,7 @@
     class="shadow-lg shadow-gray-200 w-96 h-80 flex flex-col"
   >
     <div class="w-full h-72 overflow-hidden">
-      <img
-        v-if="pictureLoaded"
-        class="w-full"
-        :src="pictureUrl"
-        alt="Photo of the vehicule"
-      />
+      <PvImage :src="pictureUrl" />
     </div>
     <div class="p-2">
       <div class="flex flex-row justify-between">
@@ -25,7 +20,9 @@
   </router-link>
 </template>
 <script>
-import { onMounted, ref, computed, watch, toRefs } from "vue";
+import { computed } from "vue";
+import { formatPrice } from "../helpers/format";
+import PvImage from "./PvImage.vue";
 
 export default {
   name: "PvVehiculeCard",
@@ -64,48 +61,13 @@ export default {
     },
   },
   setup(props) {
-    const pictureLoading = ref(false);
-    const pictureLoaded = ref(false);
-
-    const { pictureUrl } = toRefs(props);
-
-    const loadPicture = () => {
-      pictureLoading.value = true;
-      const img = new Image();
-      img.onload = () => {
-        pictureLoaded.value = true;
-        pictureLoading.value = false;
-      };
-      img.onerror = () => {
-        console.warn("Failed to load image");
-        pictureLoading.value = false;
-      };
-      img.src;
-      img.src = pictureUrl.value;
-    };
-
-    onMounted(() => {
-      loadPicture();
-    });
-
-    const formattedPrice = computed(() => {
-      // TODO i18n : use same language as vue-i18n + localize final string
-      const formatter = new Intl.NumberFormat("fr-FR", {
-        style: "currency",
-        currency: props.price.currency,
-      });
-
-      return `${formatter.format(props.price.amount)}/j`;
-    });
-
-    watch(pictureUrl, () => {
-      loadPicture();
-    });
+    const formattedPrice = computed(() =>
+      formatPrice(props.price.amount, props.price.currency, "fr-FR")
+    );
     return {
-      pictureLoaded,
-      pictureLoading,
       formattedPrice,
     };
   },
+  components: { PvImage },
 };
 </script>

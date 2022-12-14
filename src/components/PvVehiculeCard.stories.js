@@ -16,6 +16,7 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 
 Default.args = {
+  id: 1,
   title: "Chausson Flash 07 Clim cellule",
   price: {
     amount: 75,
@@ -31,6 +32,7 @@ Default.args = {
 
 export const WithoutPicture = Template.bind({});
 WithoutPicture.args = {
+  id: 1,
   title: "Chausson Flash 07 Clim cellule",
   price: {
     amount: 75,
