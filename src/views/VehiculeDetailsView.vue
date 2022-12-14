@@ -22,23 +22,24 @@
         </section>
         <section class="flex flex-row justify-between mt-10">
           <PvVehiculeDetailsProperty
-            :label="`${vehicule.seatsCount} places avec ceinture`"
+            :label="$t('vehicule.seatsCount', { count: vehicule.seatsCount })"
             icon="fa-solid fa-chair"
           />
           <PvVehiculeDetailsProperty
-            :label="`${vehicule.bedsCount} places couchages`"
+            :label="$t('vehicule.bedsCount', { count: vehicule.bedsCount })"
             icon="fa-solid fa-bed"
           />
           <PvVehiculeDetailsProperty
-            label="<3500kg Permis B"
-            icon="fa-solid fa-weight-scale"
+            :label="$t('vehicule.weight_B')"
+            icon="fa-solid
+          fa-weight-scale"
           />
           <PvVehiculeDetailsProperty
-            label="Voyage à l'étranger autorisé"
+            :label="$t('vehicule.travelAbroadAllowed')"
             icon="fa-solid fa-globe"
           />
           <PvVehiculeDetailsProperty
-            label="Animaux autorisés"
+            :label="$t('vehicule.petsAllowed')"
             icon="fa-solid fa-dog"
           />
         </section>

@@ -13,7 +13,7 @@
       </div>
       <div class="text-gray-700">{{ locationCity }}</div>
       <div class="text-gray-700 flex flex-row justify-between">
-        <span> {{ seatsCount }} places - {{ bedsCount }} couchages </span>
+        <span>{{ $t("vehicule.placesLabel", { seatsCount, bedsCount }) }}</span>
         <span>{{ ratingAverage }}</span>
       </div>
     </div>
