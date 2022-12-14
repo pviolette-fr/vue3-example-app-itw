@@ -7,6 +7,7 @@
         <PvVehiculeCard
           v-for="vehicule in vehicules"
           :key="vehicule.id"
+          :id="vehicule.id"
           :title="vehicule.title"
           :price="vehicule.price"
           :locationCity="vehicule.location.city"

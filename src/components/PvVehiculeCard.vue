@@ -1,5 +1,8 @@
 <template>
-  <div class="shadow-lg shadow-gray-200 w-96 h-80 flex flex-col">
+  <router-link
+    :to="`/vehicules/${id}`"
+    class="shadow-lg shadow-gray-200 w-96 h-80 flex flex-col"
+  >
     <div class="w-full h-72 overflow-hidden">
       <img
         v-if="pictureLoaded"
@@ -19,7 +22,7 @@
         <span>{{ ratingAverage }}</span>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 <script>
 import { onMounted, ref, computed, watch, toRefs } from "vue";
@@ -27,6 +30,10 @@ import { onMounted, ref, computed, watch, toRefs } from "vue";
 export default {
   name: "PvVehiculeCard",
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

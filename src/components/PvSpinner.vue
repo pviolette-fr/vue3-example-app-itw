@@ -1,3 +1,4 @@
+<!-- Source: https://loading.io/css/ -->
 <template>
   <div class="PvSpinner"></div>
 </template>

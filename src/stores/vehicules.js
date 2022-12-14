@@ -48,10 +48,18 @@ export const useVehiculesStore = defineStore("vehicules", () => {
     }
   }
 
+  async function getVehicule(vehiculeId) {
+    if (vehiculesLoadingState.value !== "loaded") {
+      await loadVehicules();
+    }
+    return vehicules.value.find((item) => item.id === vehiculeId);
+  }
+
   return {
     vehicules,
     vehiculesLoadingState,
     vehiculesLoadingError,
     loadVehicules,
+    getVehicule,
   };
 });
