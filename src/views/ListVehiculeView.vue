@@ -3,7 +3,7 @@
     <div class="bg-white w-96">Filter</div>
     <main class="flex flex-row flex-wrap w-full gap-8">
       <PvSpinner v-if="vehiculesLoadingState === 'loading'" class="m-auto" />
-      <template v-else>
+      <template v-else-if="vehiculesLoadingState === 'loaded'">
         <PvVehiculeCard
           v-for="vehicule in vehicules"
           :key="vehicule.id"
@@ -17,6 +17,9 @@
           :pictureUrl="vehicule.pictures[0]?.url"
         />
       </template>
+      <div v-else>
+        {{ vehiculesLoadingError }}
+      </div>
     </main>
   </div>
 </template>
@@ -38,7 +41,9 @@ export default {
       storeToRefs(store);
 
     onMounted(() => {
-      store.loadVehicules();
+      if (store.vehiculesLoadingState === "empty") {
+        store.loadVehicules();
+      }
     });
 
     return {

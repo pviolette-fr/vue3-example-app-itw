@@ -2,7 +2,9 @@
   <nav
     class="sticky top-0 z-50 flex flex-row justify-between h-16 p-3 bg-slate-300 shadow-md shadow-slate-400"
   >
-    <img :src="imgUrl" />
+    <RouterLink to="/">
+      <img :src="imgUrl" />
+    </RouterLink>
 
     <div>
       <label class="mr-1">{{ $t("settings.languageLabel") }}</label>

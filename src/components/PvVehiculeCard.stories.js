@@ -29,17 +29,4 @@ Default.args = {
   pictureUrl:
     "https://dtngh3spc2o8h.cloudfront.net/picture/ff38c897-1faa-4c27-ab4d-3364cae6a541?w=638&h=426",
 };
-
-export const WithoutPicture = Template.bind({});
-WithoutPicture.args = {
-  id: 1,
-  title: "Chausson Flash 07 Clim cellule",
-  price: {
-    amount: 75,
-    currency: "EUR",
-  },
-  locationCity: "Bordeaux",
-  seatsCount: 5,
-  bedsCounts: 2,
-  ratingAverage: 4.7,
-};
+Default.storyName = "PvVehiculeCard";

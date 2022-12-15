@@ -49,7 +49,6 @@ export default {
     );
 
     const onPreviousClick = () => {
-      console.log("onPreviousClick");
       selectedIndex.value = selectedIndex.value - 1;
     };
 
